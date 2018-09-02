@@ -22,5 +22,16 @@ cut -d: -f1 /etc/passwd | grep "collab_*" | while read -r user ; do
 done
 
 # Ensure all remote connections have been terminated
-echo "Terminating remote connections..."
-sudo ps -dN | grep pts/*
+#echo "Terminating remote connections..."
+#who | grep -o pts/[0-9]* | while read -r conn ; do
+	#sudo ps -dN | grep $conn
+
+echo "Unmounting collections..."
+for dir in /collab/*/
+do
+	echo -e "\t/collab/$dir"
+	sudo chmod 750 /collab/$dir
+	sudo umount /collab/$dir	
+done
+
+echo "Done!"

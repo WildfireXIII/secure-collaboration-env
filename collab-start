@@ -28,7 +28,7 @@ do
 
 	echo -e "\tFixing permissions..."
 	sudo chgrp -R collaboration /collab/$var
-	sudo chmod -R 770 /collab/$var
+	sudo chmod 770 /collab/$var
 done
 
 echo "Ready!"
