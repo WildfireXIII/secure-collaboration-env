@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# script for creating the overarching system environment to support collaboration (group, folders, files, and user accounts)
+
+function makeuser
+{
+	echo "Making user collab_$1..."
+	useradd -mg collaboration collab_$1
+	
+	echo "Populating files..."
+	sudo -u collab_$1 bash << EOF
+cd
+mkdir .ssh
+EOF
+
+}
+
+echo "Checking group..."
+getent group collaboration || echo "Making group"; sudo groupadd collaboration
+
+echo "Checking users..."
+for var in "$@"
+do
+	echo -e "\tcollab_$var"
+	getent passwd collab_$var || makeuser_$var
+done
+
+echo "Checking workspace..."
+if [ ! -d "/collab" ]; then
+	echo -e "\tcollab"
+	sudo mkdir -m 770 /collab
+	sudo chgrp collaboration /collab
+
+	echo -e "\tcollab_collection"
+	sudo mkdir -m 750 /collab_collection
+	sudo chgrp collaboration /collab_collection
+fi

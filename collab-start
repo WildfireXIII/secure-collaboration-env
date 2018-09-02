@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# script for setting up a collaboration session
+
+# first argument is which user to switch to 
+# arguments are the list of folders to mount
+
+# set up the tmux socket
+echo "Creating shared socket..."
+tmux -S /tmp/shared -c "exit"
+sudo chgrp collaboration /tmp/shared
+
+username=collab_$1
+shift
+
+for var in "$@"
+do
+	echo "Mounting folder $var..."
+	sudo mkdir /collab/$var
+	
+	if [ ! -d "/collab_collection/$var" ]; then
+		echo -e "\tCreating collection folder $var..."
+		sudo mkdir -m 750 /collab_collection/$var
+	fi
+	
+	echo -e "\tBinding..."
+	sudo mount --bind /collab_collection/$var /collab/$var
+
+	echo -e "\tFixing permissions..."
+	sudo chgrp -R collaboration /collab/$var
+	sudo chmod -R 770 /collab/$var
+done
+
+echo "Ready!"
+
+su $username

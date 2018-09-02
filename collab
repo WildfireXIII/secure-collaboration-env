@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# primary runnable for the system
+
+# TODO: just display list of collab commands
+
+# TODO: use like git (collab setup = collab-setup)

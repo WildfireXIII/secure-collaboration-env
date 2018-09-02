@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# destroy tmux sessions
+echo "Destroying tmux sessions..."
+tmux -S /tmp/shared kill-session -a
+tmux -S /tmp/shared kill-server
+
+# destroy tmux socket
+echo "Destroying shared socket..."
+sudo rm /tmp/shared
+
+# find all collab users
+echo "Finding all collab users..."
+cut -d: -f1 /etc/passwd | grep "collab_*" | while read -r user ; do
+	echo -e "\tFound user $user..."
+	
+	echo -e "\tKilling any owned processes..."
+	sudo pkill -KILL -u $user
+	
+	echo -e "\tRemoving ssh privileges..."
+	sudo rm /home/$user/.ssh/authorized_keys
+done
+
+# Ensure all remote connections have been terminated
+echo "Terminating remote connections..."
+sudo ps -dN | grep pts/*

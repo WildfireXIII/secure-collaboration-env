@@ -1,0 +1,14 @@
+" read normal vimrc
+source ~/.vimrc
+
+" 'automatically' read in changes made by external thing
+set autoread
+
+" so no issues with getting annoyingly prompted when opening file already being edited
+set noswapfile 
+
+" affects the delay time for below autocommands
+set updatetime=4
+
+" Update the file if you aren't doing anything
+au CursorHold,CursorHoldI * :silent! checktime|w

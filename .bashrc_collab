@@ -1,0 +1,35 @@
+#!/bin/bash
+. ~/.bashrc
+. ~/.colors
+
+
+function print_alias 
+{
+	echo -e "\t$C_CYAN_L$1$C_RESET \t$2"
+}
+function print_stat
+{
+	echo -e "$1:\t$C_BLUE_L$2$C_RESET"
+}
+
+alias vim="vim -u ~/.vimrc_collab"
+alias v="nvim -u ~/.vimrc_collab"
+alias t="tmux -S /tmp/shared new -s collab || tmux -S /tmp/shared new -t collab"
+
+
+clear
+echo -e "\n$C_GREEN_L** Secure Collaboration Environment **$C_RESET\n"
+
+echo -e "Aliases:\n"
+print_alias t "connect to shared tmux socket"
+print_alias v "run neovim with additional collaboration config"
+print_alias vim "run vim with additional collaboration config"
+
+echo ""
+echo ""
+
+print_stat User $USER
+print_stat Host "`hostname`"
+print_stat Time "`date +'%-H:%M:%S (%Z) - %a %-m/%-d/%Y'`"
+
+echo ""
