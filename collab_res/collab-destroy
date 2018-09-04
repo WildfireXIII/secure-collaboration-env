@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function display_help
+{
+	echo -e "\ncollab destroy - Destroys the session and locks all collab users out\n\tcollab destroy"
+}
+
+if [[ "$1" == "help" ]]; then
+	display_help
+	exit
+fi
+
 # destroy tmux sessions
 echo "Destroying tmux sessions..."
 tmux -S /tmp/shared kill-session -a

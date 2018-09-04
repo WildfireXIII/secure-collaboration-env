@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# this script opens an editor for entering key in the local keys folder 
+
+# assuming the first argument is the account name 
+
+function display_help
+{
+	echo -e "\ncollab ssh - Handle local ssh key collection\n\tcollab ssh add [USERNAME] - Opens editor for specified key name\n\tcollab ssh ls - List all local ssh keys by name"
+}
+
+if [[ "$1" == "help" ]]; then
+	display_help
+elif [[ "$1" == "add" ]]; then
+	if [ $# -lt 2 ]; then
+		display_help
+	else
+		vim $DATA_DIR/collab_keys/$2
+	fi
+elif [[ "$1" == "ls" ]]; then
+	ls -1 $DATA_DIR/collab_keys
+else 
+	display_help
+fi

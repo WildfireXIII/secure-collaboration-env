@@ -2,6 +2,16 @@
 
 # script for creating the overarching system environment to support collaboration (group, folders, files, and user accounts)
 
+function display_help
+{
+	echo -e "\ncollab init - Creates the shared directory, group, and will initialize the user environments for every username passed\n\tcollab init [user1 user2 ...]"
+}
+
+if [[ "$1" == "help" ]]; then
+	display_help
+	exit
+fi
+
 function makeuser
 {
 	echo "Making user collab_$1..."

@@ -1,7 +1,36 @@
 #!/bin/bash
 
-# primary runnable for the system
+function runnable
+{
+	cmd=$1
+	shift
+	$BIN_DIR/collab_res/collab-$cmd $@
+}
 
-# TODO: just display list of collab commands
-
-# TODO: use like git (collab setup = collab-setup)
+if [ $# -lt 1 ]; then
+	
+else
+	if [[ "$1" == "init" ]]; then
+		shift
+		runnable init $@
+	elif [[ "$1" == "start" ]]; then
+		shift
+		if [ $# -lt 1 ]; then
+			runnable start help
+		else
+			runnable start $@
+		fi
+	elif [[ "$1" == "destroy" ]]; then
+		runnable destroy
+	elif [[ "$1" == "ssh" ]]; then
+		shift
+		runnable ssh $@
+	elif [[ "$1" == "auth" ]]; then
+		shift
+		if [ $# -lt 2 ]; then
+			runnable auth help
+		else
+			runnable auth $@
+		fi
+	else
+fi

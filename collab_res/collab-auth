@@ -1,0 +1,17 @@
+#!bin/bash
+
+# this script enters the given key into given users' authorized key files
+
+# assumes $1 is user name, $2 is the key name
+
+function display_help
+{
+	echo -e "\ncollab auth - Add specified key to specified user's authorized_keys\n\tcollab auth [USERNAME] [KEYNAME]"
+}
+
+if [[ "$1" == "help" ]]; then
+	display_help
+	exit
+fi
+
+cat $DATA_DIR/collab_keys/$2 >> /home/collab_$2/.ssh/authorized_keys
