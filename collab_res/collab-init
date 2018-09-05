@@ -15,16 +15,16 @@ fi
 function makeuser
 {
 	echo "Making user collab_$1..."
-	useradd -mg collaboration collab_$1
+	sudo useradd -mg collaboration collab_$1
 	
 	echo "Populating files..."
 	sudo -u collab_$1 bash << EOF
 cd
 mkdir .ssh
 EOF
-	cp $BIN_DIR/collab_res/.vimrc_collab /home/collab_$1
-	cp $BIN_DIR/collab_res/.colors /home/collab_$1
-	cp $BIN_DIR/collab_res/.bashrc_collab /home/collab_$1
+	sudo cp $BIN_DIR/collab_res/.vimrc_collab /home/collab_$1
+	sudo cp $BIN_DIR/collab_res/.colors /home/collab_$1
+	sudo cp $BIN_DIR/collab_res/.bashrc_collab /home/collab_$1
 
 }
 
