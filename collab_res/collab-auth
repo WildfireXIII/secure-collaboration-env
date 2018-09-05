@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # this script enters the given key into given users' authorized key files
 
