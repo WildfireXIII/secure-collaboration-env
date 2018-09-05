@@ -35,7 +35,7 @@ echo "Checking users..."
 for var in "$@"
 do
 	echo -e "\tcollab_$var"
-	getent passwd collab_$var || makeuser_$var
+	getent passwd collab_$var || makeuser $var
 done
 
 echo "Checking workspace..."
