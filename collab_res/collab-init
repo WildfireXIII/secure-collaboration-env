@@ -22,6 +22,9 @@ function makeuser
 cd
 mkdir .ssh
 EOF
+	cp $BIN_DIR/collab_res/.vimrc_collab /home/collab_$1
+	cp $BIN_DIR/collab_res/.colors /home/collab_$1
+	cp $BIN_DIR/collab_res/.bashrc_collab /home/collab_$1
 
 }
 

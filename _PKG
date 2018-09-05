@@ -1,0 +1,3 @@
+install=collab>$BIN_DIR,collab_res>$BIN_DIR
+remove=collab<$BIN_DIR,collab_res<$BIN_DIR
+data=collab_keys

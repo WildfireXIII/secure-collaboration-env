@@ -7,8 +7,17 @@ function runnable
 	$BIN_DIR/collab_res/collab-$cmd $@
 }
 
+function helpall
+{
+	runnable init help
+	runnable start help
+	runnable destroy help
+	runnable ssh help
+	runnable auth help
+}
+
 if [ $# -lt 1 ]; then
-	
+	helpall
 else
 	if [[ "$1" == "init" ]]; then
 		shift
@@ -33,4 +42,6 @@ else
 			runnable auth $@
 		fi
 	else
+		helpall
+	fi
 fi
