@@ -14,4 +14,4 @@ if [[ "$1" == "help" ]]; then
 	exit
 fi
 
-cat $DATA_DIR/collab_keys/$2 >> /home/collab_$2/.ssh/authorized_keys
+sudo cat $DATA_DIR/collab_keys/$2 >> /home/collab_$2/.ssh/authorized_keys
